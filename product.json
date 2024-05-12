@@ -1,0 +1,93 @@
+[
+  {
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+      "name": "Верстка сайта",
+      "description": "описание сайта и верстки",
+      "image": "",
+      "category": 22,
+      "price": "1000.00",
+      "data_create": "2024-05-07",
+      "data_update": "2024-05-07"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 5,
+    "fields": {
+      "name": "Сайт",
+      "description": "Сайт помощь при написании и так далее",
+      "image": "",
+      "category": 19,
+      "price": "100.00",
+      "data_create": "2024-05-07",
+      "data_update": "2024-05-07"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 6,
+    "fields": {
+      "name": "Виджеты",
+      "description": "Написание помощь в написании виджета",
+      "image": "",
+      "category": 18,
+      "price": "500.00",
+      "data_create": "2024-05-07",
+      "data_update": "2024-05-07"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 7,
+    "fields": {
+      "name": "Бар",
+      "description": "написание отладка бара",
+      "image": "",
+      "category": 20,
+      "price": "750.00",
+      "data_create": "2024-05-07",
+      "data_update": "2024-05-07"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 8,
+    "fields": {
+      "name": "Реклама",
+      "description": "Креативные идеи и помощь в создании и распространении рекламы",
+      "image": "",
+      "category": 21,
+      "price": "5000.00",
+      "data_create": "2024-05-07",
+      "data_update": "2024-05-07"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 9,
+    "fields": {
+      "name": "Верстка сайтов приложений",
+      "description": "Помощь в оформлении",
+      "image": "",
+      "category": 22,
+      "price": "1052.00",
+      "data_create": "2024-05-07",
+      "data_update": "2024-05-07"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 10,
+    "fields": {
+      "name": "Всесоторонии консультации",
+      "description": "Консультируем по любым вопросам,в сфере разработки и внедрения",
+      "image": "",
+      "category": 23,
+      "price": "952.00",
+      "data_create": "2024-05-07",
+      "data_update": "2024-05-07"
+    }
+  }
+]

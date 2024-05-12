@@ -1,0 +1,50 @@
+[
+  {
+    "model": "catalog.category",
+    "pk": 18,
+    "fields": {
+      "name": "Виджет",
+      "description": "Описание виджета"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 19,
+    "fields": {
+      "name": "Сайт",
+      "description": "Описание сайта"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 20,
+    "fields": {
+      "name": "Бар",
+      "description": "Описание бара"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 21,
+    "fields": {
+      "name": "Реклама",
+      "description": "Описание рекламы"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 22,
+    "fields": {
+      "name": "Верстка",
+      "description": "Описание верстки"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 23,
+    "fields": {
+      "name": "Консультации",
+      "description": "Описание консультации"
+    }
+  }
+]
