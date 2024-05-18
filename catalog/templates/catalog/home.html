@@ -1,0 +1,65 @@
+{% extends "catalog/base.html" %}
+{% load custom_tags %}
+{% load something %}
+
+{% block content %}
+{% for category in category_list %}
+    <div class="col-3">
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">{{ category.name }}</h4>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                    {% with products=category|get_products_for_category:product_list %}
+                        {% for product in products %}
+                            <li>
+
+                                <h4>
+                                    <li>{{ product.name }}</li>
+                                </h4>
+                                <img class="card-img-top" src="{% mymedia product.image %}" alt="Product Image">
+                                <h1 class="card-title pricing-card-title">${{ product.price }}</h1>
+                                <button type="button" class="btn btn-lg btn-block btn-outline-primary">Купить</button>
+                            </li>
+                        {% endfor %}
+                    {% endwith %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+{% endblock %}
+
+
+
+<!--    <footer class="pt-4 my-md-5 pt-md-5 border-top">-->
+<!--        <div class="row">-->
+<!--            <div class="col-12 col-md">-->
+<!--                SkyStore-->
+<!--                <small class="d-block mb-3 text-muted">&copy; 2023</small>-->
+<!--            </div>-->
+<!--            <div class="col-6 col-md">-->
+<!--                <h5>Категории</h5>-->
+<!--                <ul class="list-unstyled text-small">-->
+<!--                    <li><a class="text-muted" href="#">Рассылки</a></li>-->
+<!--                    <li><a class="text-muted" href="#">Телеграм боты</a></li>-->
+<!--                    <li><a class="text-muted" href="#">Полезные утилиты</a></li>-->
+<!--                    <li><a class="text-muted" href="#">Веб-приложения</a></li>-->
+<!--                    <li><a class="text-muted" href="#">Микросервисы</a></li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--            <div class="col-6 col-md">-->
+<!--                <h5>Дополнительно</h5>-->
+<!--                <ul class="list-unstyled text-small">-->
+<!--                    <li><a class="text-muted" href="https://sky.pro/">Мы пишем</a></li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--            <div class="col-6 col-md">-->
+<!--                <h5>О нас</h5>-->
+<!--                <ul class="list-unstyled text-small">-->
+<!--                    <li><a class="text-muted" href="/contacts/">Контакты</a></li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </footer>-->

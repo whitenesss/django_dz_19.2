@@ -8,8 +8,9 @@ class Category(models.Model):
         help_text="введите наименование категории",
     )
     description = models.TextField(
-        verbose_name="Описание", help_text="введите описание товара"
+        verbose_name="Описание", help_text="введите описание категории"
     )
+    is_active = models.BooleanField(default=True, verbose_name="Активен")
 
     class Meta:
         verbose_name = 'Категория'
@@ -21,7 +22,7 @@ class Category(models.Model):
             cursor.execute(f'TRUNCATE TABLE {cls._meta.db_table} RESTART IDENTITY CASCADE')
 
     def __str__(self):
-        return f'{self.name} - {self.description}'
+        return f'{self.name}'
 
 
 class Product(models.Model):
@@ -41,7 +42,7 @@ class Product(models.Model):
         help_text="добавить изображение товара",
     )
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, verbose_name="Категория", blank=True, null=True,
-                                 help_text="выберите катег")
+                                 help_text="выберите категорию")
     price = models.DecimalField(
         max_digits=10,
         decimal_places=2,
@@ -54,11 +55,10 @@ class Product(models.Model):
     data_update = models.DateTimeField(
         auto_now=True, verbose_name="Дата последнего изменения(записи в БД)"
     )
+    is_active = models.BooleanField(default=True, verbose_name="Активен")
 
     def __str__(self):
-        return (
-            self.name
-        )
+        return self.name
 
     class Meta:
         verbose_name = "Товар"
