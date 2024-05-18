@@ -1,1 +1,1 @@
-# django_dz_20.1
+# django_dz_20.2
