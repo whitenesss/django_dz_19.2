@@ -4,33 +4,33 @@
 
 {% block content %}
 {% for category in category_list %}
-    <div class="col-3">
-        <div class="card mb-4 box-shadow">
-            <div class="card-header">
-                <h4 class="my-0 font-weight-normal">{{ category.name }}</h4>
-            </div>
-            <div class="card-body">
-                <ul class="list-unstyled mt-3 mb-4 text-start m-3">
-                    {% with products=category|get_products_for_category:product_list %}
-                        {% for product in products %}
-                            <li>
+<div class="col-3">
+    <div class="card mb-4 box-shadow">
+        <div class="card-header">
+            <h4 class="my-0 font-weight-normal">{{ category.name }}</h4>
+        </div>
+        <div class="card-body">
+            <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                {% with products=category|get_products_for_category:product_list %}
+                {% for product in products %}
+                <li>
 
-                                <h4>
-                                    <li>{{ product.name }}</li>
-                                </h4>
-                                <img class="card-img-top" src="{% mymedia product.image %}" alt="Product Image">
-                                <h1 class="card-title pricing-card-title">${{ product.price }}</h1>
-                                <button type="button" class="btn btn-lg btn-block btn-outline-primary">Купить</button>
-                            </li>
-                        {% endfor %}
-                    {% endwith %}
-                </ul>
-            </div>
+                    <h4>
+                        <li>{{ product.name }}</li>
+                        <h6>{{ product.description|slice:":100" }}{% if product.description|length > 100 %}...{% endif %}</h6>
+                    </h4>
+                    <img class="card-img-top" src="{% mymedia product.image %}" alt="Product Image">
+                    <h1 class="card-title pricing-card-title">${{ product.price }}</h1>
+                    <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'catalog:product' product.pk %}">Купить</a>
+                </li>
+                {% endfor %}
+                {% endwith %}
+            </ul>
         </div>
     </div>
+</div>
 {% endfor %}
 {% endblock %}
-
 
 
 <!--    <footer class="pt-4 my-md-5 pt-md-5 border-top">-->

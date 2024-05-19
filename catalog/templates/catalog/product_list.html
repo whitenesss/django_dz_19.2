@@ -1,0 +1,25 @@
+{% extends "catalog/base.html" %}
+{% load static custom_tags %}
+{% load something %}
+
+{% block content %}
+<div class="col-3">
+    <div class="card mb-4 box-shadow">
+        <div class="card-header">
+            <h4 class="my-0 font-weight-normal">{{ product.name }}</h4>
+        </div>
+        <div class="card-body">
+            <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                <li>
+                    <h6>{{ product.description|slice:":100" }}{% if product.description|length > 100 %}...{% endif %}</h6>
+                    <img class="card-img-top" src="{% mymedia product.image %}" alt="Product Image">
+                    <h1 class="card-title pricing-card-title">${{ product.price }}</h1>
+                    <button type="button" class="btn btn-lg btn-block btn-outline-primary">Купить</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
