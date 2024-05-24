@@ -1,0 +1,31 @@
+{% extends "catalog/base_2.html" %}
+
+{% load something %}
+
+{% block content %}
+<div class="row">
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <h3>{{ object.title }} </h3>
+                    <h5>{{ object.slug}}</h5>
+
+                    <h6>{{ object.description }}</h6>
+
+                    <img class="card-img-top" src="{% mymedia object.image %}" alt="Product Image">
+                    <a class="btn btn-sm btn-outline-dark"
+                       href="{% url 'catalog:blog_update' blog.pk %}">редактировать</a>
+                    <a class="btn btn-sm btn-outline-dark" href="{% url 'catalog:blog_delete' blog.pk %}">удалить</a>
+                    <h6>Дата создания: {{ object.data_create }}</h6>
+                    <div class="card-footer">
+                        просмотры: {{object.views_count}}
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

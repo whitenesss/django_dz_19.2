@@ -1,0 +1,45 @@
+{% extends "catalog/base.html" %}
+{% load custom_tags %}
+{% load something %}
+
+{% block content %}
+
+{% for category in category_list %}
+<div class="col-3">
+    <div class="card mb-4 box-shadow">
+        <div class="card-header">
+            <h4 class="my-0 font-weight-normal">{{ category.name }}</h4>
+
+            <a class="btn btn-sm btn-outline-dark" href="{% url  'catalog:catalog_create'  %}">добавить</a>
+            <a class="btn btn-sm btn-outline-dark" href="{% url  'catalog:catalog_update' category.pk  %}">изменить</a>
+            <a class="btn btn-sm btn-outline-dark" href="{% url  'catalog:catalog_delete' category.pk  %}">удалить</a>
+        </div>
+        <div class="card-body">
+            <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                {% with products=category|get_products_for_category:product_list %}
+                {% for product in products %}
+                <li>
+
+                    <h4>
+                        <li>{{ product.name }}</li>
+                        <h6>{{ product.description|slice:":100" }}{% if product.description|length > 100 %}...{% endif %}</h6>
+                    </h4>
+                    <img class="card-img-top" src="{% mymedia product.image %}" alt="Product Image">
+                    <h1 class="card-title pricing-card-title">${{ product.price }}</h1>
+                    <a class="btn btn-sm btn-outline-dark" href="{% url 'catalog:product' product.pk %}">просмотреть</a>
+
+
+                </li>
+                <div>
+                    <a class="btn btn-sm btn-outline-dark" href="{% url 'catalog:product_create' %}">product_create</a>
+                    <a class="btn btn-sm btn-outline-dark" href="{% url 'catalog:product_update' product.pk %}">изменить</a>
+                    <a class="btn btn-sm btn-outline-dark" href="{% url 'catalog:product_delete' product.pk %}">удалить</a>
+                </div>
+                {% endfor %}
+                {% endwith %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

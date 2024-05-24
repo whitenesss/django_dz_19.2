@@ -1,0 +1,35 @@
+{% extends "catalog/base_2.html" %}
+{% load something %}
+
+{% block content %}
+{%for blog in object_list %}
+<div class="row">
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body">
+                <form method="post">
+
+                    {% csrf_token %}
+                    <h3>{{ blog.title }}</h3>
+
+
+                    <h6>{{ blog.description|slice:":100" }}{% if blog.description|length > 100 %}...{% endif %}</h6>
+
+                    <img class="card-img-top" src="{% mymedia blog.image %}">
+
+                    <h6>дата создания: {{ blog.data_create }}</h6>
+                     <a class="btn btn-sm btn-outline-dark" href="{% url 'catalog:blog_detail' blog.pk %}">Посмотреть детально</a>
+
+                </form>
+                {% if blog.is_active %}
+                <a class="btn btn-sm btn-outline-dark" href="{% url 'catalog:toggle_activity' blog.pk %}">деактевировать</a>
+                {% else %}
+                <a class="btn btn-sm btn-outline-dark" href="{% url 'catalog:toggle_activity' blog.pk %}">активировать</a>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+</div>
+{%endfor%}
+{% endblock %}
