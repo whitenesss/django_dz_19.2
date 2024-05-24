@@ -1,0 +1,21 @@
+{% extends "catalog/base_2.html" %}
+
+
+{% block content %}
+<div class="col-5">
+    <div class="card mb-4 box-shadow">
+        <div class="card-header">
+            <h4 class="my-3 font-weight-normal">Create</h4>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">удалить</button>
+
+
+            </form>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

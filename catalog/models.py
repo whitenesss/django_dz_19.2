@@ -71,3 +71,44 @@ class Product(models.Model):
             "category",
             "description",
         ]
+
+
+class Blog(models.Model):
+    title = models.CharField(
+        max_length=50,
+        verbose_name="Наименование",
+        help_text="введите наименование блога",
+    )
+    slug =models.CharField(
+        max_length=150,
+        verbose_name="Наименование",
+        help_text="человекопонятный URL",
+        null=True, blank=True
+    )
+    description = models.TextField(
+        verbose_name="Описание", help_text="введите описание блога", blank=True, null=True
+    )
+    image = models.ImageField(
+        upload_to="catalog/blog",
+        verbose_name="Изображение(превью)",
+        blank=True,
+        null=True,
+    )
+    data_create = models.DateTimeField(
+        auto_now_add=True, verbose_name="Дата создания(записи в БД)"
+    )
+    data_update = models.DateTimeField(
+        auto_now=True, verbose_name="Дата последнего изменения(записи в БД)"
+    )
+    is_active = models.BooleanField(default=True, verbose_name="Активен")
+    is_published = models.BooleanField(default=True, verbose_name="Опубликован")
+    views_count = models.IntegerField(default=0, verbose_name='просмотры')
+    class Meta:
+        verbose_name = "Блог"
+        verbose_name_plural = "Блоги"
+
+    def __str__(self):
+        return self.title
+
+
+
