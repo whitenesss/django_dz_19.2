@@ -8,8 +8,7 @@ class Category(models.Model):
         help_text="введите наименование категории",
     )
     description = models.TextField(
-        verbose_name="Описание", help_text="введите описание категории"
-    )
+        help_text="введите описание категории", verbose_name="Описание")
     is_active = models.BooleanField(default=True, verbose_name="Активен")
 
     class Meta:
@@ -111,4 +110,16 @@ class Blog(models.Model):
         return self.title
 
 
+class Version(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, verbose_name="Товар",blank=True, null=True,)
+    namber_version = models.IntegerField(verbose_name="Версия", help_text="введите версию товара",unique=True)
+    name_version = models.CharField(max_length=150, verbose_name="Имя версии", help_text="введите название версии")
+    is_activ_version = models.BooleanField(verbose_name="Актуальная", help_text="укажите актуальность версии")
+
+    class Meta:
+        verbose_name = "Версия"
+        verbose_name_plural = "Версии"
+
+    def __str__(self):
+        return self.name_version
 
