@@ -15,12 +15,14 @@ class CategoryForm(ModelForm):
     class Meta:
         model = Category
         fields = "__all__"
+        exclude = ("owner",)
 
 
 class ProductForm(StyleFormMixin, ModelForm):
     class Meta:
         model = Product
         fields = "__all__"
+        exclude = ("owner",)
 
     def clean(self):
         stap = ['казино', 'криптовалюта', 'крипта', 'биржа', 'дешево', 'бесплатно', 'обман', 'полиция', 'радар']

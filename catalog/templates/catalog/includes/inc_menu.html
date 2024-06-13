@@ -15,5 +15,19 @@
         <a class="p-2 btn btn-outline-primary" href="/">Главная</a>
         <a class="p-2 btn btn-outline-primary" href="contact/">Контакты</a>
         <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:blog' %}">blog</a>
+        {% if user.is_authenticated %}
+        <form id="logout-form" method="post" action="{% url 'users:logout' %}" style="display: none;">
+            {% csrf_token %}
+        </form>
+        <a class="p-2 btn btn-outline-primary" href="#"
+           onclick="event.preventDefault(); document.getElementById('logout-form').submit(); return false;">
+            выйти
+        </a>
+        <a class="p-2 btn btn-outline-primary" href="{% url 'users:profile' %}">редактирования профиля</a>
+
+        {% else %}
+        <a class="p-2 btn btn-outline-primary" href="{% url 'users:login' %}">войти</a>
+        <a class="p-2 btn btn-outline-primary" href="{% url 'users:register' %}">регистрация</a>
+        {% endif %}
     </nav>
 </div>

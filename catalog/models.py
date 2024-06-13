@@ -1,5 +1,7 @@
 from django.db import models, connection
 
+from users.models import User
+
 
 class Category(models.Model):
     name = models.CharField(
@@ -10,6 +12,7 @@ class Category(models.Model):
     description = models.TextField(
         help_text="введите описание категории", verbose_name="Описание")
     is_active = models.BooleanField(default=True, verbose_name="Активен")
+    owner = models.ForeignKey(User, verbose_name="Автор", blank=True, null=True, on_delete=models.SET_NULL)
 
     class Meta:
         verbose_name = 'Категория'
@@ -55,6 +58,7 @@ class Product(models.Model):
         auto_now=True, verbose_name="Дата последнего изменения(записи в БД)"
     )
     is_active = models.BooleanField(default=True, verbose_name="Активен")
+    owner = models.ForeignKey(User, verbose_name="Автор", blank=True, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.name
