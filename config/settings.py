@@ -35,7 +35,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "phonenumber_field",
     "catalog",
+    "users",
 ]
 
 MIDDLEWARE = [
@@ -114,12 +116,24 @@ USE_TZ = True
 STATIC_URL = "static/"
 
 STATICFILES_DIRS = (
-    BASE_DIR /'static',
+    BASE_DIR / 'static',
 )
-
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 MEDIA_URL = "media/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+AUTH_USER_MODEL = 'users.User'
+LOGIN_REDIRECT_URL = 'catalog:index'
+LOGOUT_REDIRECT_URL = '/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'purenkov.alex@yandex.ru'
+EMAIL_HOST_PASSWORD = 'jcyhmvakfgrfmwrm'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'purenkov.alex@yandex.ru'
+EMAIL_SUBJECT_PREFIX = 'purenkov.alex@yandex.ru: '
+SITE_URL = 'http://127.0.0.1:8000/'

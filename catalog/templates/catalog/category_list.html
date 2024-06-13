@@ -10,9 +10,10 @@
         <div class="card-header">
             <h4 class="my-0 font-weight-normal">{{ category.name }}</h4>
 
-            <a class="btn btn-sm btn-outline-dark" href="{% url  'catalog:catalog_create'  %}">добавить</a>
+            {% if user.is_authenticated %}
             <a class="btn btn-sm btn-outline-dark" href="{% url  'catalog:catalog_update' category.pk  %}">изменить</a>
             <a class="btn btn-sm btn-outline-dark" href="{% url  'catalog:catalog_delete' category.pk  %}">удалить</a>
+            {% endif %}
         </div>
         <div class="card-body">
             <ul class="list-unstyled mt-3 mb-4 text-start m-3">
@@ -31,9 +32,13 @@
 
                 </li>
                 <div>
-                    <a class="btn btn-sm btn-outline-dark" href="{% url 'catalog:product_create' %}">product_create</a>
-                    <a class="btn btn-sm btn-outline-dark" href="{% url 'catalog:product_update' product.pk %}">изменить</a>
-                    <a class="btn btn-sm btn-outline-dark" href="{% url 'catalog:product_delete' product.pk %}">удалить</a>
+                    {% if user.is_authenticated %}
+
+                    <a class="btn btn-sm btn-outline-dark"
+                       href="{% url 'catalog:product_update' product.pk %}">изменить</a>
+                    <a class="btn btn-sm btn-outline-dark"
+                       href="{% url 'catalog:product_delete' product.pk %}">удалить</a>
+                    {% endif %}
                 </div>
                 {% endfor %}
                 {% endwith %}
