@@ -64,8 +64,9 @@ def contact(request):
     return render(request, "catalog/contacts.html")
 
 
-class ProductDetailView(DetailView):
+class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
+    login_url = '/users/'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -73,10 +74,11 @@ class ProductDetailView(DetailView):
         return context
 
 
-class ProductCreateView(CreateView, LoginRequiredMixin):
+class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:index')
+    login_url = '/users/'
 
     def form_valid(self, form):
         product = form.save()
@@ -86,10 +88,11 @@ class ProductCreateView(CreateView, LoginRequiredMixin):
         return super().form_valid(form)
 
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:index')
+    login_url = '/users/'
 
     def get_success_url(self):
         return reverse('catalog:product', args=[self.kwargs.get('pk')])
@@ -128,20 +131,23 @@ class CategoryCreateView(CreateView, LoginRequiredMixin):
         return super().form_valid(form)
 
 
-class CategoryUpdateView(UpdateView):
+class CategoryUpdateView(UpdateView, LoginRequiredMixin):
     model = Category
     form_class = CategoryForm
     success_url = reverse_lazy('catalog:index')
+    login_url = '/users/'
 
 
-class CategoryDeleteView(DeleteView):
+class CategoryDeleteView(DeleteView, LoginRequiredMixin):
     model = Category
     success_url = reverse_lazy('catalog:index')
+    login_url = '/users/'
 
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
     success_url = reverse_lazy('catalog:index')
+    login_url = '/users/'
 
 
 def toggle_activity(request, pk):

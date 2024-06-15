@@ -1,4 +1,7 @@
+from django.contrib.auth.views import LoginView
 from django.urls import path
+
+import users
 from catalog.apps import CatalogConfig
 from catalog.views import CategoryListView, ProductDetailView, CategoryCreateView, CategoryUpdateView, \
     CategoryDeleteView, BloglistView, BlogCreateView, BlogDetailView, BlogUpdateView, BlogDeleteView, \
@@ -23,4 +26,6 @@ urlpatterns = [
     path("<int:pk>/blog_update", BlogUpdateView.as_view(), name="blog_update"),
     path("<int:pk>/blog_delete", BlogDeleteView.as_view(), name="blog_delete"),
     path("activity<int:pk>/", toggle_activity, name="toggle_activity"),
+
+
 ]
