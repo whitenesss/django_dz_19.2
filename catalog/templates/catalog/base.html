@@ -9,17 +9,19 @@
     <h1 class="display-4">Skystore</h1>
 
 </div>
-{% if user.is_authenticated %}
+
 <div class="container">
     <div class="row">
         <div class="col-md-6">
+            {% if user.is_authenticated %}
             <a class="btn btn-sm btn-outline-dark" href="{% url  'catalog:catalog_create'  %}">добавить категорию</a>
+            {% endif %}
             <a class="btn btn-sm btn-outline-dark" href="{% url 'catalog:product_create' %}">добавить продукт </a>
 
         </div>
     </div>
 </div>
-{% endif %}
+
 <div class="container">
     <div class="row text-center">
         {% block content %}
