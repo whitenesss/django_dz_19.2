@@ -11,8 +11,11 @@
             <h4 class="my-0 font-weight-normal">{{ category.name }}</h4>
 
             {% if user.is_authenticated %}
+            {% if user == product.owner or user.is_superuser %}
             <a class="btn btn-sm btn-outline-dark" href="{% url  'catalog:catalog_update' category.pk  %}">изменить</a>
+
             <a class="btn btn-sm btn-outline-dark" href="{% url  'catalog:catalog_delete' category.pk  %}">удалить</a>
+            {% endif %}
             {% endif %}
         </div>
         <div class="card-body">
@@ -34,12 +37,14 @@
                 </li>
                 <div>
 
-
+                    {% if perms.product.can_unpublish_product and perms.product.change_product_description and perms.product.change_product_category or user == product.owner %}
                     <a class="btn btn-sm btn-outline-dark"
                        href="{% url 'catalog:product_update' product.pk %}">изменить</a>
+                    {% endif%}
+                    {% if user == product.owner or user.is_superuser %}
                     <a class="btn btn-sm btn-outline-dark"
                        href="{% url 'catalog:product_delete' product.pk %}">удалить</a>
-
+                    {% endif%}
                 </div>
                 {% endfor %}
                 {% endwith %}

@@ -59,6 +59,7 @@ class Product(models.Model):
     )
     is_active = models.BooleanField(default=True, verbose_name="Активен")
     owner = models.ForeignKey(User, verbose_name="Автор", blank=True, null=True, on_delete=models.SET_NULL)
+    is_published = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -74,6 +75,11 @@ class Product(models.Model):
             "category",
             "description",
         ]
+        permissions = (
+            ('can_unpublish_product', 'Can unpublish product'),
+            ('change_product_description', 'Can change product description'),
+            ('change_product_category', 'Can change product category'),
+        )
 
 
 class Blog(models.Model):

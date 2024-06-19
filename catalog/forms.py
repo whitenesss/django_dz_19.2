@@ -1,5 +1,5 @@
 from django.core.exceptions import ValidationError
-from django.forms import ModelForm
+from django.forms import ModelForm, forms
 
 from catalog.models import Category, Product, Version
 
@@ -31,6 +31,12 @@ class ProductForm(StyleFormMixin, ModelForm):
         for name_stap in stap:
             if name_stap in name:
                 raise ValidationError('Нельзя использовать слова: {}'.format(name_stap))
+
+
+class ProductModeratorForm(StyleFormMixin, ModelForm):
+    class Meta:
+        model = Product
+        fields = ('description', 'category', 'is_active',)
 
 
 class VersionForm(StyleFormMixin, ModelForm):

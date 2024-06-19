@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 from django.forms import inlineformset_factory
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
@@ -6,7 +7,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from pytils.translit import slugify
 
 from catalog.models import Category, Product, Blog, Version
-from catalog.forms import CategoryForm, ProductForm, VersionForm
+from catalog.forms import CategoryForm, ProductForm, VersionForm, ProductModeratorForm
 
 
 class BloglistView(ListView):
@@ -116,6 +117,19 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
             return super().form_valid(form)
         else:
             return self.render_to_response(self.get_context_data(form=form, formset=formset))
+
+    def get_form_class(self):
+        user = self.request.user
+        if user == self.object.owner:
+            return ProductForm
+        if user.is_superuser:
+            return ProductForm
+        if user.has_perm("catalog.can_unpublish_product") and user.has_perm(
+                "catalog.change_product_description") and user.has_perm(
+                "catalog.change_product_category"):
+            return ProductModeratorForm
+
+        raise PermissionDenied
 
 
 class CategoryCreateView(CreateView, LoginRequiredMixin):
