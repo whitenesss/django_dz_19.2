@@ -1,5 +1,6 @@
 from django.contrib.auth.views import LoginView
 from django.urls import path
+from django.views.decorators.cache import cache_page
 
 import users
 from catalog.apps import CatalogConfig
@@ -10,10 +11,13 @@ from catalog.views import contact
 
 app_name = CatalogConfig.name
 
+
+
+
 urlpatterns = [
     path("", CategoryListView.as_view(), name="index"),
     path("contact/", contact, name="contact"),
-    path("product/<int:pk>", ProductDetailView.as_view(), name="product"),
+    path("product/<int:pk>", cache_page(60)(ProductDetailView.as_view()), name="product"),
     path("catalog_create/", CategoryCreateView.as_view(), name="catalog_create"),
     path("product_create/", ProductCreateView.as_view(), name="product_create"),
     path("<int:pk>/catalog_update/", CategoryUpdateView.as_view(), name="catalog_update"),
