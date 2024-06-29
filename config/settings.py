@@ -53,7 +53,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "config.urls"
+ROOT_URLCONF = os.getenv("ROOT_URLCONF")
 
 TEMPLATES = [
     {
@@ -116,7 +116,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATIC_URL = "static/"
+STATIC_URL = os.getenv("STATIC_URL")
 
 STATICFILES_DIRS = (
     BASE_DIR / 'static',
@@ -146,7 +146,7 @@ CACHE_ENABLED = True
 if CACHE_ENABLED:
     CACHES = {
         "default": {
-            "BACKEND": "django.core.cache.backends.redis.RedisCache",
+            "BACKEND": os.getenv("BACKEND"),
             "LOCATION": os.getenv('LOCATION'),
 
             }
